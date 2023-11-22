@@ -1,0 +1,41 @@
+CREATE TABLE `course_enrollment` (
+  'id' int NOT NULL AUTO_INCREMENT,
+  'courseId` int NOT NULL,
+  'studentId` int NOT NULL,
+  'status' varchar(20) NOT NULL,
+  'enrollmentData' DATE,
+  'completionDate' DATE,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+CREATE TABLE `course` (
+  'id' int NOT NULL AUTO_INCREMENT,
+  'title' varchar(50) NOT NULL,
+  'instructorId' int NOT NULL,
+  'description' varchar(500) NOT NULL,
+  'avgDuration' int,
+  'difficulty' varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
+) 
+
+
+---SAME-----
+
+CREATE TABLE `languagelift`.`course_enrollment` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `courseId` INT NOT NULL,
+  `studentId` INT NOT NULL,
+  `status` VARCHAR(20) NOT NULL,
+  `enrollmentDate` DATE NULL,
+  `completionDate` DATE NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `languagelift`.`course` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(50) NOT NULL,
+  `instructorId` INT NOT NULL,
+  `description` VARCHAR(500) NOT NULL,
+  `avgDuration` INT NOT NULL,
+  `difficulty` VARCHAR(15) NOT NULL,
+  PRIMARY KEY (`id`));
