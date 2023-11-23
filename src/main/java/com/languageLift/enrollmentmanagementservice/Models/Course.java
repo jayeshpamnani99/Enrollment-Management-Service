@@ -1,10 +1,12 @@
 package com.languageLift.enrollmentmanagementservice.Models;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
+@Entity
+@Table(name="course")
 public class Course
 {
     @Id
@@ -15,6 +17,10 @@ public class Course
     private String description;
     private Integer avgDuration;
     private String difficulty;
+
+    @Transient
+    private HashMap instructorDetails;
+
 
     public Integer getId() {
         return id;
@@ -63,4 +69,26 @@ public class Course
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
     }
+
+    public Map getInstructorDetails() {
+        return instructorDetails;
+    }
+
+    public void setInstructorDetails(Map instructorDetails) {
+        this.instructorDetails = new HashMap(instructorDetails);
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", instructorId=" + instructorId +
+                ", description='" + description + '\'' +
+                ", avgDuration=" + avgDuration +
+                ", difficulty='" + difficulty + '\'' +
+                ", instructorDetails=" + instructorDetails +
+                '}';
+    }
+
 }
