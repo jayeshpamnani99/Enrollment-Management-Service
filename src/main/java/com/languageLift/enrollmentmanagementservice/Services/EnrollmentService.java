@@ -3,6 +3,7 @@ package com.languageLift.enrollmentmanagementservice.Services;
 import com.languageLift.enrollmentmanagementservice.CustomException;
 import com.languageLift.enrollmentmanagementservice.Dao.CourseDao;
 import com.languageLift.enrollmentmanagementservice.Dao.CourseEnrollmentDao;
+import com.languageLift.enrollmentmanagementservice.Models.Constants;
 import com.languageLift.enrollmentmanagementservice.Models.Course;
 import com.languageLift.enrollmentmanagementservice.Models.CourseEnrollment;
 import jakarta.persistence.EntityManager;
@@ -123,7 +124,7 @@ public class EnrollmentService {
     }
 
     public JSONObject getUserDetailsFromToken(String token) {
-        final String uri = "http://3.92.164.4:8081/auth";
+        final String uri = "http://" + Constants.AWS_IP + ":8081/auth";
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -144,7 +145,7 @@ public class EnrollmentService {
     }
 
     public JSONObject getUserDetailsFromUserId(int userId) {
-        final String uri = "http://3.92.164.4:8081/user-details?userId="+ userId;
+        final String uri = "http://" + Constants.AWS_IP + ":8081/user-details?userId="+ userId;
 
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> entity = new HttpEntity<>(null);
