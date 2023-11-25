@@ -16,6 +16,8 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -118,6 +120,51 @@ public class EnrollmentService {
         });
 
         res.put("courseDetails", courseList);
+
+        return res;
+
+    }
+
+    private static List<Course> removeEnrolledCourses(List<Course> courseList, List<Course> enrolledCourseList) {
+        HashSet<Integer> enrolledCourseIds = new HashSet<>();
+        for (Course course : enrolledCourseList) {
+            enrolledCourseIds.add(course.getId());
+        }
+
+        List<Course> filteredCourseList = new ArrayList<>();
+        for (Course course : courseList) {
+            if (!enrolledCourseIds.contains(course.getId())) {
+                filteredCourseList.add(course);
+            }
+        }
+
+        return filteredCourseList;
+    }
+
+    public JSONObject getNotEnrolledCoursesByStuId(String authToken) throws Exception {
+        JSONObject userObj = getUserDetailsFromToken(authToken);
+        if (null == userObj || userObj.isEmpty()){
+            throw new CustomException(new Exception("User not Authorised"), HttpStatus.UNAUTHORIZED);
+        }
+        logger.info("user object : {}",userObj);
+        JSONObject res = new JSONObject();
+        res.put("userDetails", userObj);
+
+        List<Course> courseList = Streamable.of(courseDao.findAll()).toList();
+        List<Course> enrolledCourseList = courseEnrollmentDao.findEnrolledCourses(userObj.getInt("id"));
+
+        List<Course> filteredCourseList = removeEnrolledCourses(courseList, enrolledCourseList);
+
+
+        filteredCourseList.forEach(course -> {
+            JSONObject instructorDetails = getUserDetailsFromUserId(course.getInstructorId());
+            logger.info("instructor details : {}",instructorDetails);
+            if (null != instructorDetails) {
+                course.setInstructorDetails(instructorDetails.toMap());
+            }
+        });
+
+        res.put("courseDetails", filteredCourseList);
 
         return res;
 
