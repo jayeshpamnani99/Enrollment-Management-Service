@@ -44,6 +44,14 @@ public class EnrollmentResource
         return new ResponseEntity<Map>(enrolledCourses.toMap(), HttpStatus.OK);
     }
 
+    @GetMapping("/getEnrolledCoursesByInstructorId")
+    public ResponseEntity<Map> getEnrolledCoursesByInstructorId(@RequestHeader(HttpHeaders.AUTHORIZATION) String authToken) throws Exception {
+        // code that uses the language variable
+        JSONObject coursesTaught = enrollmentService.getEnrolledCoursesByInstructorId(authToken);
+
+        return new ResponseEntity<Map>(coursesTaught.toMap(), HttpStatus.OK);
+    }
+
     @GetMapping("/getNotEnrolledCoursesByStuId")
     public ResponseEntity<Map> getNotEnrolledCoursesByStuId(@RequestHeader(HttpHeaders.AUTHORIZATION) String authToken) throws Exception {
         // code that uses the language variable

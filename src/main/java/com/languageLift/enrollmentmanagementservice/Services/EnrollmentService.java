@@ -125,6 +125,23 @@ public class EnrollmentService {
 
     }
 
+    public JSONObject getEnrolledCoursesByInstructorId(String authToken) throws Exception {
+        JSONObject userObj = getUserDetailsFromToken(authToken);
+        if (null == userObj || userObj.isEmpty()){
+            throw new CustomException(new Exception("User not Authorised"), HttpStatus.UNAUTHORIZED);
+        }
+        logger.info("user object : {}",userObj);
+        JSONObject res = new JSONObject();
+        res.put("userDetails", userObj);
+
+        List<Course> courseList = courseEnrollmentDao.findCoursesByInstructorId(userObj.getInt("id"));
+
+        res.put("courseDetails", courseList);
+
+        return res;
+
+    }
+
     private static List<Course> removeEnrolledCourses(List<Course> courseList, List<Course> enrolledCourseList) {
         HashSet<Integer> enrolledCourseIds = new HashSet<>();
         for (Course course : enrolledCourseList) {
