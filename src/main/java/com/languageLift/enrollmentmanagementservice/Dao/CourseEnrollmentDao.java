@@ -17,7 +17,7 @@ public interface CourseEnrollmentDao extends CrudRepository <CourseEnrollment,In
     @Query(value = "SELECT c FROM Course c JOIN CourseEnrollment ce ON c.id = ce.courseId WHERE ce.studentId = :studentId", nativeQuery = false)
     public List<Course> findEnrolledCourses(@Param("studentId") Integer studentId);
 
-    @Query(value = "SELECT c FROM Course c WHERE c.instructorId = :studentId", nativeQuery = false)
+    @Query(value = "SELECT c FROM Course c WHERE c.instructorId = :instructorId", nativeQuery = false)
     public List<Course> findCoursesByInstructorId(@Param("instructorId") Integer instructorId);
 
 
