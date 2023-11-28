@@ -1,0 +1,177 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EnrollmentResource</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.languageLift.enrollmentmanagementservice.Resource</a>
+</div>
+
+<h1>Coverage Summary for Class: EnrollmentResource (com.languageLift.enrollmentmanagementservice.Resource)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EnrollmentResource</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11.1%
+  </span>
+  <span class="absValue">
+    (2/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.languageLift.enrollmentmanagementservice.Resource;
+&nbsp;
+&nbsp;import com.languageLift.enrollmentmanagementservice.CustomException;
+&nbsp;import com.languageLift.enrollmentmanagementservice.Models.Course;
+&nbsp;import com.languageLift.enrollmentmanagementservice.Services.EnrollmentService;
+&nbsp;import jakarta.websocket.server.PathParam;
+&nbsp;import org.json.JSONObject;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.HttpHeaders;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.web.bind.annotation.ExceptionHandler;
+&nbsp;import org.springframework.web.bind.annotation.GetMapping;
+&nbsp;import org.springframework.web.bind.annotation.RequestHeader;
+&nbsp;import org.springframework.web.bind.annotation.RestController;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;@RestController
+<b class="fc">&nbsp;public class EnrollmentResource</b>
+&nbsp;{
+<b class="fc">&nbsp;    Logger logger = LoggerFactory.getLogger(EnrollmentResource.class);</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private EnrollmentService enrollmentService;
+&nbsp;
+&nbsp;
+&nbsp;    @GetMapping(&quot;/getAllCourses&quot;)
+&nbsp;    public ResponseEntity&lt;List&gt; getAllCourses(@RequestHeader(HttpHeaders.AUTHORIZATION) String authToken) throws Exception {
+&nbsp;        // code that uses the language variable
+<b class="nc">&nbsp;        List&lt;Course&gt; allCourses = enrollmentService.getAllCourses(authToken);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new ResponseEntity&lt;List&gt;(allCourses, HttpStatus.OK);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/getEnrolledCoursesByStuId&quot;)
+&nbsp;    public ResponseEntity&lt;Map&gt; getEnrolledCoursesByStuId(@RequestHeader(HttpHeaders.AUTHORIZATION) String authToken) throws Exception {
+&nbsp;        // code that uses the language variable
+<b class="nc">&nbsp;        JSONObject enrolledCourses = enrollmentService.getEnrolledCoursesByStuId(authToken);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new ResponseEntity&lt;Map&gt;(enrolledCourses.toMap(), HttpStatus.OK);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @GetMapping(&quot;/enroll&quot;)
+&nbsp;    public ResponseEntity&lt;Map&gt; enroll(@RequestHeader(HttpHeaders.AUTHORIZATION) String authToken, @PathParam(&quot;courseId&quot;) int courseId) throws Exception {
+&nbsp;        // code that uses the language variable
+<b class="nc">&nbsp;        int enrollmentId = enrollmentService.enroll(authToken, courseId);</b>
+<b class="nc">&nbsp;        JSONObject res = new JSONObject();</b>
+<b class="nc">&nbsp;        res.put(&quot;enrollmentId&quot;, enrollmentId);</b>
+<b class="nc">&nbsp;        res.put(&quot;message&quot;, &quot;Successfully enrolled in course!&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new ResponseEntity&lt;Map&gt;(res.toMap(), HttpStatus.OK);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    @ExceptionHandler(CustomException.class)
+&nbsp;    public ResponseEntity&lt;Object&gt; handleException(CustomException exception) {
+<b class="nc">&nbsp;        logger.info(&quot;inside exception handler: {}&quot;,exception);</b>
+<b class="nc">&nbsp;        JSONObject obj = new JSONObject();</b>
+<b class="nc">&nbsp;        obj.put(&quot;status&quot;,exception.getStatus());</b>
+<b class="nc">&nbsp;        obj.put(&quot;message&quot;,exception.getE().getMessage());</b>
+<b class="nc">&nbsp;        return ResponseEntity</b>
+<b class="nc">&nbsp;                .status(exception.getStatus())</b>
+<b class="nc">&nbsp;                .body(obj.toMap());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-11-28 18:19</div>
+</div>
+</body>
+</html>
