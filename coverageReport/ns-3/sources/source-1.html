@@ -1,0 +1,211 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Course</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.languageLift.enrollmentmanagementservice.Models</a>
+</div>
+
+<h1>Coverage Summary for Class: Course (com.languageLift.enrollmentmanagementservice.Models)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Course</td>
+<td class="coverageStat">
+  <span class="percent">
+    37.5%
+  </span>
+  <span class="absValue">
+    (6/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    37.5%
+  </span>
+  <span class="absValue">
+    (6/16)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Course$HibernateInstantiator$P8Ni1lc8</td>
+  </tr>
+  <tr>
+    <td class="name">Course$HibernateProxy$yBH2jVSC</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    37.5%
+  </span>
+  <span class="absValue">
+    (6/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    37.5%
+  </span>
+  <span class="absValue">
+    (6/16)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.languageLift.enrollmentmanagementservice.Models;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;@Entity
+&nbsp;@Table(name=&quot;course&quot;)
+<b class="fc">&nbsp;public class Course</b>
+&nbsp;{
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    private Integer id;
+&nbsp;    private String title;
+&nbsp;    private Integer instructorId;
+&nbsp;    private String description;
+&nbsp;    private Integer avgDuration;
+&nbsp;    private String difficulty;
+&nbsp;
+&nbsp;    @Transient
+&nbsp;    private HashMap instructorDetails;
+&nbsp;
+&nbsp;
+&nbsp;    public Integer getId() {
+<b class="nc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setId(Integer id) {
+<b class="fc">&nbsp;        this.id = id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getTitle() {
+<b class="nc">&nbsp;        return title;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTitle(String title) {
+<b class="nc">&nbsp;        this.title = title;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Integer getInstructorId() {
+<b class="fc">&nbsp;        return instructorId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setInstructorId(Integer instructorId) {
+<b class="fc">&nbsp;        this.instructorId = instructorId;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getDescription() {
+<b class="nc">&nbsp;        return description;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDescription(String description) {
+<b class="nc">&nbsp;        this.description = description;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Integer getAvgDuration() {
+<b class="nc">&nbsp;        return avgDuration;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAvgDuration(Integer avgDuration) {
+<b class="nc">&nbsp;        this.avgDuration = avgDuration;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getDifficulty() {
+<b class="nc">&nbsp;        return difficulty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDifficulty(String difficulty) {
+<b class="nc">&nbsp;        this.difficulty = difficulty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map getInstructorDetails() {
+<b class="fc">&nbsp;        return instructorDetails;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setInstructorDetails(Map instructorDetails) {
+<b class="fc">&nbsp;        this.instructorDetails = new HashMap(instructorDetails);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="nc">&nbsp;        return &quot;Course{&quot; +</b>
+&nbsp;                &quot;id=&quot; + id +
+&nbsp;                &quot;, title=&#39;&quot; + title + &#39;\&#39;&#39; +
+&nbsp;                &quot;, instructorId=&quot; + instructorId +
+&nbsp;                &quot;, description=&#39;&quot; + description + &#39;\&#39;&#39; +
+&nbsp;                &quot;, avgDuration=&quot; + avgDuration +
+&nbsp;                &quot;, difficulty=&#39;&quot; + difficulty + &#39;\&#39;&#39; +
+&nbsp;                &quot;, instructorDetails=&quot; + instructorDetails +
+&nbsp;                &#39;}&#39;;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-11-28 18:19</div>
+</div>
+</body>
+</html>
