@@ -12,9 +12,14 @@ Maven Spring: Version 3.1.5
 
 Maven: 3.6.3 or later
 
+## Project Structure
+src/main/java: Contains the main Java source code.
+
+src/main/resources: Contains configuration files and static resources.
+
 ## Building the Project
 To build the project, run the following command in the project directory:
-'_mvn clean install_'
+'_mvn package -DskipTests=True_'
 
 This will build the project and create a JAR file in the target directory.
 
