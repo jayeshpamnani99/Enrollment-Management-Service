@@ -55,26 +55,29 @@ public class EnrollmentServiceTest
         MockitoAnnotations.openMocks(this);
     }
 
-//    @Test
-//    public void testGetAllCourses_success() throws Exception{
-//        // Arrange
-//        String authToken = "valid-token";
-//        JSONObject userObject = new JSONObject();
-//        userObject.put("id", 1);
+    @Test
+    public void testGetAllCourses_success() throws Exception{
+        // Arrange
+        String authToken = "valid-token";
+        JSONObject userObject = new JSONObject();
+        userObject.put("id", 1);
+        doReturn(userObject).when(enrollmentService).getUserDetailsFromToken(authToken);
 //        Mockito.when(enrollmentService.getUserDetailsFromToken(authToken)).thenReturn(userObject);
-//
-//        List<Course> courseList = Streamable.of(new Course(), new Course()).toList();
-//        Mockito.when(courseDao.findAll()).thenReturn(courseList);
-//
-//        // Act
-//        List<Course> actualCourses = enrollmentService.getAllCourses(authToken);
-//
-//        // Assert
-//        Assertions.assertEquals(courseList, actualCourses);
-//        actualCourses.forEach(course -> {
-//            Assertions.assertNotNull(course.getInstructorDetails());
-//        });
-//    }
+        Course course1 = new Course();
+        course1.setId(1);
+        course1.setInstructorId(2);
+        List<Course> courseList = Streamable.of(course1).toList();
+        Mockito.when(courseDao.findAll()).thenReturn(courseList);
+
+        // Act
+        List<Course> actualCourses = enrollmentService.getAllCourses(authToken);
+
+        // Assert
+        Assertions.assertEquals(courseList, actualCourses);
+        actualCourses.forEach(course -> {
+            Assertions.assertNull(course.getInstructorDetails());
+        });
+    }
 
 //    @Test
 //    public void testGetAllCourses_unauthorized() throws Exception {
@@ -366,6 +369,138 @@ public class EnrollmentServiceTest
 //        JSONObject result = enrollmentService.getUserDetailsFromUserId(userId);
 //        assertNull(result);
 //    }
+
+
+    @Test
+    public void testGetEnrolledCoursesByInstructorId() throws Exception {
+        // Arrange
+        String authToken = "validAuthToken";
+        JSONObject userObj = new JSONObject();
+        userObj.put("id", 1);
+        userObj.put("otherDetails", "otherDetails");
+
+        List<Course> courseList = new ArrayList<>();
+        courseList.add(new Course());
+        courseList.add(new Course());
+
+//        when(enrollmentService.getUserDetailsFromToken(authToken)).thenReturn(userObj);
+        doReturn(userObj).when(enrollmentService).getUserDetailsFromToken(authToken);
+        when(courseEnrollmentDao.findCoursesByInstructorId(1)).thenReturn(courseList);
+
+        // Act
+        JSONObject result = enrollmentService.getEnrolledCoursesByInstructorId(authToken);
+
+        // Assert
+        assertEquals(userObj, result.getJSONObject("userDetails"));
+//        assertEquals(courseList, result.getJSONArray("courseDetails").toList());
+    }
+
+    @Test
+    public void testGetEnrolledCoursesByInstructorIdUnauthorized() throws Exception {
+        // Arrange
+        String authToken = "invalidAuthToken";
+
+        doReturn(null).when(enrollmentService).getUserDetailsFromToken(authToken);
+//        when(enrollmentService.getUserDetailsFromToken(authToken)).thenReturn(null);
+
+        // Act and Assert
+        assertThrows(CustomException.class, () -> {
+            enrollmentService.getEnrolledCoursesByInstructorId(authToken);
+        });
+    }
+
+
+
+    @Test
+    public void testRemoveEnrolledCourses() {
+        // Arrange
+        List<Course> courseList = new ArrayList<>();
+        Course course1 = new Course();
+        course1.setId(1);
+        course1.setTitle("Course1");
+
+        Course course2 = new Course();
+        course2.setId(2);
+        course2.setTitle("Course2");
+
+        Course course3 = new Course();
+        course3.setId(3);
+        course3.setTitle("Course3");
+
+        courseList.add(course1);
+        courseList.add(course2);
+        courseList.add(course3);
+
+        List<Course> enrolledCourseList = new ArrayList<>();
+        enrolledCourseList.add(course1);
+
+        // Act
+        List<Course> filteredCourseList = enrollmentService.removeEnrolledCourses(courseList, enrolledCourseList);
+
+        // Assert
+        assertEquals(2, filteredCourseList.size());
+    }
+
+    @Test
+    public void testGetNotEnrolledCoursesByStuId() throws Exception {
+        // Arrange
+        String authToken = "validAuthToken";
+        JSONObject userObj = new JSONObject();
+        userObj.put("id", 1);
+        userObj.put("otherDetails", "otherDetails");
+
+        List<Course> courseList = new ArrayList<>();
+        Course course1 = new Course();
+        course1.setId(1);
+        course1.setTitle("Course1");
+        course1.setInstructorId(2);
+
+        Course course2 = new Course();
+        course2.setId(2);
+        course2.setTitle("Course2");
+        course2.setInstructorId(2);
+
+        Course course3 = new Course();
+        course3.setId(3);
+        course3.setTitle("Course3");
+        course3.setInstructorId(2);
+
+        courseList.add(course1);
+        courseList.add(course2);
+        courseList.add(course3);
+
+        List<Course> enrolledCourseList = new ArrayList<>();
+        enrolledCourseList.add(course1);
+
+//        when(enrollmentService.getUserDetailsFromToken(authToken)).thenReturn(userObj);
+        doReturn(userObj).when(enrollmentService).getUserDetailsFromToken(authToken);
+        when(courseDao.findAll()).thenReturn(courseList);
+        when(courseEnrollmentDao.findEnrolledCourses(1)).thenReturn(enrolledCourseList);
+
+        // Act
+        JSONObject result = enrollmentService.getNotEnrolledCoursesByStuId(authToken);
+
+        // Assert
+        assertEquals(userObj, result.getJSONObject("userDetails"));
+
+        List filteredCourseList = result.getJSONArray("courseDetails").toList();
+        assertEquals(2, filteredCourseList.size());
+    }
+
+    @Test
+    public void testGetNotEnrolledCoursesByStuIdUnauthorized() throws Exception {
+        // Arrange
+        String authToken = "invalidAuthToken";
+
+
+        doReturn(null).when(enrollmentService).getUserDetailsFromToken(authToken);
+//        when(enrollmentService.getUserDetailsFromToken(authToken)).thenReturn(null);
+
+        // Act and Assert
+        assertThrows(CustomException.class, () -> {
+            enrollmentService.getNotEnrolledCoursesByStuId(authToken);
+        });
+    }
 
 
 

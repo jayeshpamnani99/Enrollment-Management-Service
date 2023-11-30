@@ -142,7 +142,7 @@ public class EnrollmentService {
 
     }
 
-    private static List<Course> removeEnrolledCourses(List<Course> courseList, List<Course> enrolledCourseList) {
+    public static List<Course> removeEnrolledCourses(List<Course> courseList, List<Course> enrolledCourseList) {
         HashSet<Integer> enrolledCourseIds = new HashSet<>();
         for (Course course : enrolledCourseList) {
             enrolledCourseIds.add(course.getId());

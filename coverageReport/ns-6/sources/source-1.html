@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>Coverage Report > CourseEnrollmentDao</title>
+  <title>Coverage Report > CourseDao</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.languageLift.enrollmentmanagementservice.Dao</a>
 </div>
 
-<h1>Coverage Summary for Class: CourseEnrollmentDao (com.languageLift.enrollmentmanagementservice.Dao)</h1>
+<h1>Coverage Summary for Class: CourseDao (com.languageLift.enrollmentmanagementservice.Dao)</h1>
 
 <table class="coverageStats">
 
@@ -30,13 +30,13 @@ Current scope:     <a href="../../index.html">all classes</a>
   <th class="name">Class</th>
 </tr>
   <tr>
-    <td class="name">CourseEnrollmentDao$MockitoMock$ctKiwx9a</td>
+    <td class="name">CourseDao$MockitoMock$O3ZsG41s</td>
   </tr>
   <tr>
-    <td class="name">CourseEnrollmentDao$MockitoMock$ctKiwx9a$auxiliary$BKnPdMLX</td>
+    <td class="name">CourseDao$MockitoMock$O3ZsG41s$auxiliary$7EtNCAUA</td>
   </tr>
   <tr>
-    <td class="name">CourseEnrollmentDao$MockitoMock$ctKiwx9a$auxiliary$U2bycOFf</td>
+    <td class="name">CourseDao$MockitoMock$O3ZsG41s$auxiliary$ks4jBRze</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -51,29 +51,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.languageLift.enrollmentmanagementservice.Dao;
 &nbsp;
 &nbsp;import com.languageLift.enrollmentmanagementservice.Models.Course;
-&nbsp;import com.languageLift.enrollmentmanagementservice.Models.CourseEnrollment;
-&nbsp;import jakarta.persistence.*;
-&nbsp;import org.springframework.data.jpa.repository.Modifying;
 &nbsp;import org.springframework.data.jpa.repository.Query;
 &nbsp;import org.springframework.data.repository.CrudRepository;
-&nbsp;import org.springframework.data.repository.query.Param;
 &nbsp;import org.springframework.stereotype.Repository;
 &nbsp;
 &nbsp;import java.util.List;
 &nbsp;
 &nbsp;@Repository
-&nbsp;public interface CourseEnrollmentDao extends CrudRepository &lt;CourseEnrollment,Integer&gt;
+&nbsp;public interface CourseDao extends CrudRepository &lt;Course,Integer&gt;
 &nbsp;{
-&nbsp;    @Query(value = &quot;SELECT c FROM Course c JOIN CourseEnrollment ce ON c.id = ce.courseId WHERE ce.studentId = :studentId&quot;, nativeQuery = false)
-&nbsp;    public List&lt;Course&gt; findEnrolledCourses(@Param(&quot;studentId&quot;) Integer studentId);
-&nbsp;
-&nbsp;    @Query(value = &quot;SELECT ce FROM CourseEnrollment ce WHERE ce.courseId=:courseId AND ce.studentId=:studentId&quot;)
-&nbsp;    public CourseEnrollment findCourseEnrollmentByCourseIdAndAndStudentId(@Param(&quot;courseId&quot;) int courseId, @Param(&quot;studentId&quot;) int studentId);
-&nbsp;
-&nbsp;    @Modifying
-&nbsp;    @Query(value = &quot;INSERT INTO course_enrollment (courseId, studentId, status, enrollmentDate) &quot; +
-&nbsp;            &quot;VALUES (:courseId, :studentId, &#39;Enrolled&#39;, CURRENT_DATE())&quot;, nativeQuery = true)
-&nbsp;    public void enrollStudentInCourse(@Param(&quot;courseId&quot;) Integer courseId, @Param(&quot;studentId&quot;) Integer studentId);
 &nbsp;
 &nbsp;}
 </code>
@@ -99,7 +85,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-11-28 18:19</div>
+    <div style="float:right;">generated on 2023-11-30 13:24</div>
 </div>
 </body>
 </html>

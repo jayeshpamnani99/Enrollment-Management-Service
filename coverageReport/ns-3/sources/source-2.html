@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>Coverage Report > CourseEnrollment</title>
+  <title>Coverage Report > Course</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.languageLift.enrollmentmanagementservice.Models</a>
 </div>
 
-<h1>Coverage Summary for Class: CourseEnrollment (com.languageLift.enrollmentmanagementservice.Models)</h1>
+<h1>Coverage Summary for Class: Course (com.languageLift.enrollmentmanagementservice.Models)</h1>
 
 <table class="coverageStats">
 
@@ -38,46 +38,46 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">CourseEnrollment</td>
+  <td class="name">Course</td>
 <td class="coverageStat">
   <span class="percent">
-    38.5%
+    100%
   </span>
   <span class="absValue">
-    (5/13)
+    (16/16)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    38.5%
+    100%
   </span>
   <span class="absValue">
-    (5/13)
+    (16/16)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">CourseEnrollment$HibernateInstantiator$wHID7doj</td>
+    <td class="name">Course$HibernateInstantiator$phZLp0DZ</td>
   </tr>
   <tr>
-    <td class="name">CourseEnrollment$HibernateProxy$kIPZcQxW</td>
+    <td class="name">Course$HibernateProxy$RmixBnYp</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    38.5%
+    100%
   </span>
   <span class="absValue">
-    (5/13)
+    (16/16)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    38.5%
+    100%
   </span>
   <span class="absValue">
-    (5/13)
+    (16/16)
   </span>
 </td>
 </tr>
@@ -92,20 +92,25 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;import jakarta.persistence.*;
 &nbsp;
-&nbsp;import java.sql.Date;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
 &nbsp;
 &nbsp;@Entity
-&nbsp;@Table(name = &quot;course_enrollment&quot;)
-<b class="fc">&nbsp;public class CourseEnrollment</b>
+&nbsp;@Table(name=&quot;course&quot;)
+<b class="fc">&nbsp;public class Course</b>
 &nbsp;{
 &nbsp;    @Id
 &nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
 &nbsp;    private Integer id;
-&nbsp;    private Integer courseId;
-&nbsp;    private Integer studentId;
-&nbsp;    private String status;
-&nbsp;    private Date enrollmentDate;
-&nbsp;    private Date completionDate;
+&nbsp;    private String title;
+&nbsp;    private Integer instructorId;
+&nbsp;    private String description;
+&nbsp;    private Integer avgDuration;
+&nbsp;    private String difficulty;
+&nbsp;
+&nbsp;    @Transient
+&nbsp;    private HashMap instructorDetails;
+&nbsp;
 &nbsp;
 &nbsp;    public Integer getId() {
 <b class="fc">&nbsp;        return id;</b>
@@ -115,45 +120,67 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        this.id = id;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    public Integer getCourseId() {
-<b class="nc">&nbsp;        return courseId;</b>
+&nbsp;    public String getTitle() {
+<b class="fc">&nbsp;        return title;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    public void setCourseId(Integer courseId) {
-<b class="fc">&nbsp;        this.courseId = courseId;</b>
+&nbsp;    public void setTitle(String title) {
+<b class="fc">&nbsp;        this.title = title;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    public Integer getStudentId() {
-<b class="nc">&nbsp;        return studentId;</b>
+&nbsp;    public Integer getInstructorId() {
+<b class="fc">&nbsp;        return instructorId;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    public void setStudentId(Integer studentId) {
-<b class="fc">&nbsp;        this.studentId = studentId;</b>
+&nbsp;    public void setInstructorId(Integer instructorId) {
+<b class="fc">&nbsp;        this.instructorId = instructorId;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    public String getStatus() {
-<b class="nc">&nbsp;        return status;</b>
+&nbsp;    public String getDescription() {
+<b class="fc">&nbsp;        return description;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    public void setStatus(String status) {
-<b class="nc">&nbsp;        this.status = status;</b>
+&nbsp;    public void setDescription(String description) {
+<b class="fc">&nbsp;        this.description = description;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    public Date getEnrollmentDate() {
-<b class="nc">&nbsp;        return enrollmentDate;</b>
+&nbsp;    public Integer getAvgDuration() {
+<b class="fc">&nbsp;        return avgDuration;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    public void setEnrollmentDate(Date enrollmentDate) {
-<b class="nc">&nbsp;        this.enrollmentDate = enrollmentDate;</b>
+&nbsp;    public void setAvgDuration(Integer avgDuration) {
+<b class="fc">&nbsp;        this.avgDuration = avgDuration;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    public Date getCompletionDate() {
-<b class="nc">&nbsp;        return completionDate;</b>
+&nbsp;    public String getDifficulty() {
+<b class="fc">&nbsp;        return difficulty;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    public void setCompletionDate(Date completionDate) {
-<b class="nc">&nbsp;        this.completionDate = completionDate;</b>
+&nbsp;    public void setDifficulty(String difficulty) {
+<b class="fc">&nbsp;        this.difficulty = difficulty;</b>
 &nbsp;    }
+&nbsp;
+&nbsp;    public Map getInstructorDetails() {
+<b class="fc">&nbsp;        return instructorDetails;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setInstructorDetails(Map instructorDetails) {
+<b class="fc">&nbsp;        this.instructorDetails = new HashMap(instructorDetails);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        return &quot;Course{&quot; +</b>
+&nbsp;                &quot;id=&quot; + id +
+&nbsp;                &quot;, title=&#39;&quot; + title + &#39;\&#39;&#39; +
+&nbsp;                &quot;, instructorId=&quot; + instructorId +
+&nbsp;                &quot;, description=&#39;&quot; + description + &#39;\&#39;&#39; +
+&nbsp;                &quot;, avgDuration=&quot; + avgDuration +
+&nbsp;                &quot;, difficulty=&#39;&quot; + difficulty + &#39;\&#39;&#39; +
+&nbsp;                &quot;, instructorDetails=&quot; + instructorDetails +
+&nbsp;                &#39;}&#39;;
+&nbsp;    }
+&nbsp;
 &nbsp;}
 </code>
 </pre>
@@ -178,7 +205,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-11-28 18:19</div>
+    <div style="float:right;">generated on 2023-11-30 13:24</div>
 </div>
 </body>
 </html>

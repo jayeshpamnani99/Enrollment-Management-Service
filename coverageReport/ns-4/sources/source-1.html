@@ -52,18 +52,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    20%
+    14.3%
   </span>
   <span class="absValue">
-    (1/5)
+    (1/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    11.1%
+    9.1%
   </span>
   <span class="absValue">
-    (2/18)
+    (2/22)
   </span>
 </td>
 </tr>
@@ -121,6 +121,22 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;        return new ResponseEntity&lt;Map&gt;(enrolledCourses.toMap(), HttpStatus.OK);</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    @GetMapping(&quot;/getEnrolledCoursesByInstructorId&quot;)
+&nbsp;    public ResponseEntity&lt;Map&gt; getEnrolledCoursesByInstructorId(@RequestHeader(HttpHeaders.AUTHORIZATION) String authToken) throws Exception {
+&nbsp;        // code that uses the language variable
+<b class="nc">&nbsp;        JSONObject coursesTaught = enrollmentService.getEnrolledCoursesByInstructorId(authToken);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new ResponseEntity&lt;Map&gt;(coursesTaught.toMap(), HttpStatus.OK);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/getNotEnrolledCoursesByStuId&quot;)
+&nbsp;    public ResponseEntity&lt;Map&gt; getNotEnrolledCoursesByStuId(@RequestHeader(HttpHeaders.AUTHORIZATION) String authToken) throws Exception {
+&nbsp;        // code that uses the language variable
+<b class="nc">&nbsp;        JSONObject notEnrolledCourses = enrollmentService.getNotEnrolledCoursesByStuId(authToken);</b>
+&nbsp;
+<b class="nc">&nbsp;        return new ResponseEntity&lt;Map&gt;(notEnrolledCourses.toMap(), HttpStatus.OK);</b>
+&nbsp;    }
+&nbsp;
 &nbsp;
 &nbsp;    @GetMapping(&quot;/enroll&quot;)
 &nbsp;    public ResponseEntity&lt;Map&gt; enroll(@RequestHeader(HttpHeaders.AUTHORIZATION) String authToken, @PathParam(&quot;courseId&quot;) int courseId) throws Exception {
@@ -171,7 +187,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-11-28 18:19</div>
+    <div style="float:right;">generated on 2023-11-30 13:24</div>
 </div>
 </body>
 </html>
